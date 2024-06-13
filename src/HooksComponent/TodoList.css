@@ -1,0 +1,120 @@
+
+/* Todo List Styles */
+
+.todo-list {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+justify-content: space-between;
+  }
+  
+  .todo-list h1 {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  
+  .todo-list form {
+    margin-bottom: 20px;
+  }
+  
+  .todo-list input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+  
+   button[type="submit"] {
+    background-color: #4CAF50;
+    border-radius: 8px;
+  border: 1px solid transparent;
+    color: #fff;
+    padding: 0.7em 1.4em;
+    margin: 0.6em;
+    font-size: 1em;
+    font-family: inherit;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+
+
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+  
+  .todo-list button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  .todo-list ul {
+    list-style: none;
+    padding: 0.5em;
+    margin: 0.7em;
+  }
+  
+  .todo-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .todo-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .todo-list span {
+    font-size: 16px;
+  }
+  
+  .todo-list input[type="text"][readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+  }
+  
+  .todo-list button[type="button"] {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.6em;
+  }
+  
+  .todo-list button[type="button"]:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .todo-list button[type="button"].delete {
+    background-color: #ff69b4;
+    color: #fff;
+  }
+  .todo-list button[type="button"].edit:hover {
+    background-color: #23527c;
+  }
+  .todo-list button[type="button"].delete:hover {
+    background-color: #ff3737;
+  }
+
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filters label {
+    margin-right: 10px;
+  }
+  
+  .filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

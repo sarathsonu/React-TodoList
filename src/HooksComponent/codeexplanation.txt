@@ -1,0 +1,222 @@
+Explain the code
+
+Here's a line-by-line explanation of the code:
+
+Importing React and CSS
+
+import React, { useState, useEffect } from 'react';
+import './TodoList.css'
+The code imports React and its useState and useEffect hooks from the react module. It also imports the TodoList.css file, which is not shown in the code snippet.
+
+Defining the TodoList component
+
+function TodoList() {
+  ...
+}
+
+The code defines a functional component named TodoList.
+
+Initializing state variables
+
+const [todos, setTodos] = useState([]);
+const [newTodo, setNewTodo] = useState('');
+const [editing, setEditing] = useState(null);
+const [filter, setFilter] = useState('all');
+const [sort, setSort] = useState('createdAt');
+
+The code initializes five state variables using the useState hook:
+
+todos: an array of todo items, initialized to an empty array []
+newTodo: the text of the new todo item being added, initialized to an empty string ''
+editing: the ID of the todo item being edited, initialized to null
+filter: the current filter applied to the todo list, initialized to 'all'
+sort: the current sort order of the todo list, initialized to 'createdAt'
+
+Using useEffect to persist todo list to local storage
+
+useEffect(() => {
+  const storedTodos = localStorage.getItem('todos');
+  if (storedTodos) {
+    setTodos(JSON.parse(storedTodos));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}, [todos]);
+
+The code uses the useEffect hook to persist the todo list to local storage. The first effect is run when the component mounts, and it retrieves the stored todo list from local storage and sets the todos state variable. The second effect is run whenever the todos state variable changes, and it saves the updated todo list to local storage.
+
+Defining event handlers
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if (newTodo.trim() !== '') {
+    const newTodoItem = { id: Date.now(), text: newTodo, completed: false };
+    setTodos([...todos, newTodoItem]);
+    setNewTodo('');
+  }
+};
+
+const handleEdit = (id) => {
+  setEditing(id);
+};
+
+const handleSave = (id, text) => {
+  const updatedTodos = todos.map((todo) => {
+    if (todo.id === id) {
+      return { ...todo, text };
+    }
+    return todo;
+  });
+  setTodos(updatedTodos);
+  setEditing(null);
+};
+
+const handleDelete = (id) => {
+  const confirmDelete = window.confirm(`Are you sure you want to delete todo item ${id}?`);
+  if (confirmDelete) {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  }
+};
+
+const handleFilterChange = (event) => {
+  setFilter(event.target.value);
+};
+
+const handleSortChange = (event) => {
+  setSort(event.target.value);
+};
+
+The code defines six event handlers:
+
+handleSubmit: adds a new todo item when the form is submitted
+handleEdit: sets the editing state to the ID of the todo item being edited
+handleSave: updates the text of the edited todo item and resets the editing state
+handleDelete: deletes a todo item when the delete button is clicked
+handleFilterChange: updates the filter state when the filter select box changes
+handleSortChange: updates the sort state when the sort select box changes
+
+Defining filtered and sorted todo lists
+
+const filteredTodos = todos.filter((todo) => {
+  if (filter === 'all') return true;
+  if (filter === 'completed') return todo.completed;
+  if (filter === 'incomplete') return !todo.completed;
+});
+
+const sortedTodos = filteredTodos.sort((a, b) => {
+  if (sort === 'createdAt') return a.id - b.id;
+  if (sort === 'completed') return a.completed - b.completed;
+});
+
+The code defines two variables:
+
+filteredTodos: an array of todo items filtered based on the current filter state
+sortedTodos: an array of todo items sorted based on the current sort state
+Rendering the component
+
+
+
+Todo List Container
+This is the JSX code that returns the Todo List component. Here's a breakdown of what's happening:
+
+<div className="todo-list">
+  ...
+</div>
+
+The component is wrapped in a div element with a class of todo-list.
+
+Header
+
+
+<h1>Todo List</h1>
+The component displays an h1 header with the text "Todo List".
+
+Form
+
+<form onSubmit={handleSubmit}>
+  ...
+</form>
+The component renders a form element that submits to the handleSubmit function when the user clicks the "Add" button.
+
+Input Field
+
+<input
+  type="text"
+  value={newTodo}
+  onChange={(event) => setNewTodo(event.target.value)}
+  placeholder="Add new todo"
+/>
+The component renders an input field with the following properties:
+
+type: set to text
+value: set to the current value of newTodo
+onChange: sets the newTodo state to the input value when the user types
+placeholder: displays the text "Add new todo" when the input field is empty
+Add Button
+
+<button type="submit">Add</button>
+The component renders a button element with the text "Add" that submits the form when clicked.
+
+Filters
+
+
+<div className="filters">
+  ...
+</div>
+The component renders a div element with a class of filters that contains two label elements.
+
+Filter Select
+
+
+<label>
+  Filter:
+  <select value={filter} onChange={handleFilterChange}>
+    <option value="all">All</option>
+    <option value="completed">Completed</option>
+    <option value="incomplete">Incomplete</option>
+  </select>
+</label>
+The component renders a select element with three options:
+
+All
+Completed
+Incomplete
+The value property is set to the current value of filter, and the onChange event is handled by the handleFilterChange function.
+
+Sort Select
+
+<label>
+  Sort:
+  <select value={sort} onChange={handleSortChange}>
+    <option value="createdAt">Creation Date</option>
+    <option value="completed">Completed Status</option>
+  </select>
+</label>
+The component renders a select element with two options:
+
+Creation Date
+Completed Status
+
+The value property is set to the current value of sort, and the onChange event is handled by the handleSortChange function.
+
+Todo List
+
+<ul>
+  {sortedTodos.map((todo) => (
+    <li key={todo.id}>
+      ...
+    </li>
+  ))}
+</ul>
+The component renders an ul element that contains a list of li elements, each representing a todo item. The sortedTodos array is mapped over, and each todo item is rendered with the following elements:
+
+Text: either an input field or a span element displaying the todo text, depending on whether the item is being edited
+Edit Button: a button element with the text "Edit" that calls the handleEdit function when clicked
+Delete Button: a button element with the text "Delete" that calls the handleDelete function when clicked
+
+
+
+
